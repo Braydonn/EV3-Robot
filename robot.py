@@ -37,83 +37,6 @@ def main():
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
 
-	# Line following algorithm test
-	print("Starting Line Algorithm test...")
-	degrees = 800
-	motor.runForever(speed=speed)
-
-	print(str(i)+": Started")
-	try:
-		while True:
-			sleep(0.5)
-			i += 1
-			print("\n"+str(i)+": "+colorL.decodeColor())
-			print(str(i)+": Straight")
-
-			# Turn Left
-			if colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
-				motor.stop() # Stop motor before turning
-				motor.leftMotor(speed=speed)
-				motor.rightMotor(speed=-speed)
-
-				sleep(2)
-				motor.runForever(speed=speed)
-
-				i += 1
-				print(str(i)+": turned left")
-
-			# Turn right
-			if colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
-				motor.stop() # Stop motor before turning
-				motor.leftMotor(speed=-speed)
-				motor.rightMotor(speed=speed)
-
-				sleep(2)
-				motor.runForever(speed=speed)
-
-				i += 1
-				print(str(i)+": turned right")
-
-			# Line following (left bend)
-			if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'white':
-				#motor.stop() # Stop motor before turning
-				motor.leftMotor(speed=speed/2)
-				motor.rightMotor(speed=speed)
-
-				sleep(0.2)
-				motor.stop()
-
-				i += 1
-				print(str(i)+": left bend")
-
-			# Line following (right bend)
-			if colorR.decodeColor() == 'black' and colorL.decodeColor() == 'white':
-				#motor.stop() # Stop motor before turning
-				motor.leftMotor(speed=speed)
-				motor.rightMotor(speed=speed/2)
-
-				sleep(0.2)
-				motor.stop()
-
-				i += 1
-				print(str(i)+": right bend")
-
-			# Do a 360 degree scan
-			if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'black':
-				x = True
-				while x == True:
-					motor.stop()
-					motor.leftMotor(speed=speed)
-					motor.rightMotor(speed=-speed)
-
-					if colorL.decodeColor() == 'white' and colorR.decodeColor() == 'white':
-						x = False
-
-	except KeyboardInterrupt:
-		motor.stop()
-		print("Finished Line Algorithm test at "+str(i)+" steps.")
-		i=0
-
 	# New Line following algorithm test
 	print("Starting Line Algorithm test v2...")
 	degrees = 800
@@ -124,7 +47,7 @@ def main():
 		while True:
 			sleep(0.5)
 			i += 1
-			print("\n"+str(i)+": "+colorL.decodeColor())
+			print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
 			print(str(i)+": Straight")
 
 			# Go Straight
@@ -159,7 +82,7 @@ def main():
 			# Line following (left bend)
 			if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'white':
 				#motor.stop() # Stop motor before turning
-				motor.rightMotor(speed=speed*1.75)
+				motor.leftMotor(speed=speed*0.75)
 
 				i += 1
 				print(str(i)+": left bend")
@@ -167,7 +90,7 @@ def main():
 			# Line following (right bend)
 			if colorR.decodeColor() == 'black' and colorL.decodeColor() == 'white':
 				#motor.stop() # Stop motor before turning
-				motor.leftMotor(speed=speed*1.75)
+				motor.rightMotor(speed=speed*0.75)
 
 				i += 1
 				print(str(i)+": right bend")
@@ -191,7 +114,10 @@ def main():
 		motor.stop()
 		print("Finished Line Algorithm test v2 at "+str(i)+" steps.")
 		i=0
-
+		
+	print("Press any button on ev3 to continue")
+	while btn.any()==False: # While no button is pressed.
+		sleep(0.01)  # Wait 0.01 second
 
 	# Raw color sensor test
 	print("Starting color sensor test...")

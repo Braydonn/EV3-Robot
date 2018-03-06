@@ -39,7 +39,7 @@ class largeMotor:
 	def leftMotor(self,speed):
 		self.leftM.run_forever(speed_sp=speed,stop_action='brake')
 
-	def rightMotor(self,speed,time):
+	def rightMotor(self,speed):
 		self.rightM.run_forever(speed_sp=speed,stop_action='brake')
 
 	# Control methods

@@ -22,11 +22,11 @@ class color:
 
 	def decodeRawColor(self):
 		self.cl.mode='RGB-RAW'
-	    red = self.cl.value(0)
-	    green = self.cl.value(1)
-	    blue = self.cl.value(2)
+		red = self.cl.value(0)
+		green = self.cl.value(1)
+		blue = self.cl.value(2)
 
-	    return "Red: " + str(red) + ", Green: " + str(green) + ", Blue: " + str(blue)
+		return "Red: " + str(red) + ", Green: " + str(green) + ", Blue: " + str(blue)
 
 
 class infrared:
