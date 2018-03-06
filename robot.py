@@ -25,10 +25,9 @@ def main():
 	# Declare your objects here:
 	btn = Button()
 	motor = largeMotor(leftM='outA',rightM='outD')
-	gripperM = tachoMotor(port='outB')
 	colorL = color('in1') # This sensor needs to be on the left for the turning test
 	colorR = color('in4') # This sensor needs to be on the right for the turning test
-	infraredS = infrared('in2')
+	
 
 	# say our name (sorry, no forced memes here)
 	print("Introducing the T-800 from Cyberdyne Systems")
@@ -37,11 +36,6 @@ def main():
 
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
-
-	# Gripper test
-	print("Testing tacho motors...")
-	gripperM.grip(position=100,speed=100)
-	print("Ending tacho motor test")
 
 	# Line following algorithm test
 	print("Starting Line Algorithm test...")
@@ -178,6 +172,10 @@ def main():
 				i += 1
 				print(str(i)+": right bend")
 
+			# Check for endzone
+			if colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'blue':
+				print("endzone")
+				
 			# Do a 360 degree scan
 			if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'black':
 				x = True
@@ -194,26 +192,6 @@ def main():
 		print("Finished Line Algorithm test v2 at "+str(i)+" steps.")
 		i=0
 
-	# Infrared sensor test
-	print("Starting infrared test...")
-	try:
-		while True:
-			dist = infraredS.returnDistance()
-			print(dist)
-			sleep(1)
-			i += 1
-	except KeyboardInterrupt:
-		i = 0
-		print("Ending infrared test")
-
-	# Color sensor test
-	print("Starting color sensor test...")
-	try:
-		while True:
-			print(colorL.decodeColor())
-			sleep(1)
-	except KeyboardInterrupt:
-		print("Ending color sensor test")
 
 	# Raw color sensor test
 	print("Starting color sensor test...")
