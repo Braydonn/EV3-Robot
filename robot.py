@@ -47,10 +47,10 @@ def main():
 		while True:
 			i += 1
 			print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
-			print(str(i)+": Straight")
 
 			# Go Straight
 			if colorL.decodeColor() == 'white' or colorL.decodeColor() == 'black' and colorR.decodeColor() == 'white' or colorR.decodeColor() == 'black':
+				print(str(i)+": Straight")
 				motor.runForever(speed=speed)
 				i+=1
 
