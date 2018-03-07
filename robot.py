@@ -55,28 +55,28 @@ def main():
 				i+=1
 
 			# Turn Left
-			if colorL.decodeColor() == 'green' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
-				motor.stop() # Stop motor before turning
-				print(str(i)+": turned left")
-				motor.leftMotor(speed=speed)
-				motor.rightMotor(speed=-speed)
+			#if colorL.decodeColor() == 'green' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
+			#	motor.stop() # Stop motor before turning
+			#	print(str(i)+": turned left")
+			#	motor.leftMotor(speed=speed)
+			#	motor.rightMotor(speed=-speed)
 
-				sleep(1.5)
-				motor.runForever(speed=speed)
+			#	sleep(1.5)
+			#	motor.runForever(speed=speed)
 
-				i += 1
+			#	i += 1
 
 			# Turn right
-			if colorR.decodeColor() == 'green' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
-				motor.stop() # Stop motor before turning
-				print(str(i)+": turned right")
-				motor.leftMotor(speed=-speed)
-				motor.rightMotor(speed=speed)
+			#if colorR.decodeColor() == 'green' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
+			#	motor.stop() # Stop motor before turning
+			#	print(str(i)+": turned right")
+			#	motor.leftMotor(speed=-speed)
+			#	motor.rightMotor(speed=speed)
 
-				sleep(1.5)
-				motor.runForever(speed=speed)
+			#	sleep(1.5)
+			#	motor.runForever(speed=speed)
 
-				i += 1
+			#	i += 1
 
 			# Line following (left bend)
 			if colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
@@ -97,11 +97,11 @@ def main():
 			# Check for endzone
 			if colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
 				print("endzone")
-								
+
 			#Check for bottle
 			if infra.value() < '20':
 				print("bottle")
-				
+
 			# Do a 360 degree scan
 			#if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'black':
 			#	print("Start scan")
@@ -119,7 +119,7 @@ def main():
 		motor.stop()
 		print("Finished Line Algorithm test v2 at "+str(i)+" steps.")
 		i=0
-		
+
 	print("Press any button on ev3 to continue")
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
