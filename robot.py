@@ -27,7 +27,7 @@ def main():
 	motor = largeMotor(leftM='outA',rightM='outD')
 	colorL = color('in1') # This sensor needs to be on the left for the turning test
 	colorR = color('in4') # This sensor needs to be on the right for the turning test
-	
+	infra = infrared('in3')
 
 	# say our name (sorry, no forced memes here)
 	print("Introducing the T-800 from Cyberdyne Systems")
@@ -98,6 +98,11 @@ def main():
 			if colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
 				print("endzone")
 				
+			#Check for bottle
+			if infra.value() < '20':
+				print("bottle")
+				
+			
 			# Do a 360 degree scan
 			#if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'black':
 			#	print("Start scan")
