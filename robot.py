@@ -45,6 +45,31 @@ def main():
 				motor.runForever(speed=speed)
 				i+=1
 
+			# Line following (left bend)
+			else if colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
+				#motor.stop() # Stop motor before turning
+				print(str(i)+": left bend")
+				motor.leftMotor(speed=speed*0.25)
+
+				i += 1
+
+			# Line following (right bend)
+			else if colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
+				#motor.stop() # Stop motor before turning
+				print(str(i)+": right bend")
+				motor.rightMotor(speed=speed*0.25)
+
+				i += 1
+
+			# Check for endzone
+			else if colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
+				print("endzone")
+
+			#Check for bottle
+			else if infra.value() < '20':
+				print("bottle")
+
+
 			# Turn Left
 			#if colorL.decodeColor() == 'green' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
 			#	motor.stop() # Stop motor before turning
@@ -68,30 +93,6 @@ def main():
 			#	motor.runForever(speed=speed)
 
 			#	i += 1
-
-			# Line following (left bend)
-			if colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
-				#motor.stop() # Stop motor before turning
-				print(str(i)+": left bend")
-				motor.leftMotor(speed=speed*0.25)
-
-				i += 1
-
-			# Line following (right bend)
-			if colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
-				#motor.stop() # Stop motor before turning
-				print(str(i)+": right bend")
-				motor.rightMotor(speed=speed*0.25)
-
-				i += 1
-
-			# Check for endzone
-			if colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
-				print("endzone")
-
-			#Check for bottle
-			if infra.value() < '20':
-				print("bottle")
 
 			# Do a 360 degree scan
 			#if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'black':
