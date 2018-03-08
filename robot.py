@@ -10,13 +10,6 @@ def main():
 	i = 0 # Needed for incremental functions
 	speed = 100 # Needed to set speed for algorithm test and D&R test
 
-	# For fun
-	name = "T-800"
-	banner = '''[0;1;34;94m▀▛▘[0m  [0;1;34;94m▞▀▖▞▀▖▞▀▖[0m
-	 [0;1;34;94m▌▄▄▖▚▄▘[0;34m▌▞▌▌▞▌[0m
-	 [0;34m▌[0m   [0;34m▌[0m [0;34m▌▛[0m [0;34m▌▛[0m [0;34m▌[0m
-	 [0;34m▘[0m   [0;34m▝▀[0m [0;37m▝▀[0m [0;37m▝▀[0m'''
-
 	# Should implement so that when you load the program, it waits for a button
 	# press to start moving. That way when starting the robot for the
 	# competition, you don't have to wait for the program to be loaded, as you
@@ -29,9 +22,7 @@ def main():
 	colorR = color('in4') # This sensor needs to be on the right for the turning test
 	infra = infrared('in3')
 
-	# say our name (sorry, no forced memes here)
-	print("Introducing the T-800 from Cyberdyne Systems")
-	Sound.speak("Introducing the T-800, from Cyberdyne Systems. Programmed by Skynet.")
+	# say our name
 	print("Press any button to start")
 
 	while btn.any()==False: # While no button is pressed.
