@@ -68,6 +68,7 @@ def main():
 			#Check for bottle
 			else if infra.value() < '20':
 				print("bottle")
+				break
 
 
 			# Turn Left
