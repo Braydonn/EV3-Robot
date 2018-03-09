@@ -21,6 +21,31 @@ class color:
 	def decodeColor(self):
 		return self.colors[self.cl.value()]
 
+	# New and improved way of colour detection
+	def decodeColorRange(color):
+		# Red checking block
+		if color[0][0] < self.cl.value(0) and color[1][0] > self.cl.value(0): # Lower red value
+			print("Passed red") # For debugging
+		else:
+			print("Failed red")
+			return False
+
+		# Green checking block
+		if color[0][1] < self.cl.value(1) and color[1][1] > self.cl.value(1): # Lower green value
+			print("Passed green")
+		else:
+			print("Failed green")
+			return False
+
+		# Blue checking block
+		if color[0][2] < self.cl.value(2) and color[1][2] > self.cl.value(2): # Lower blue value
+			print("Passed blue")
+			return True # Passed all tests, color sensed is x color
+		else:
+			print("Failed blue")
+			return False
+
+
 	def decodeRawColor(self):
 		self.cl.mode='RGB-RAW'
 		red = self.cl.value(0)

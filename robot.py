@@ -117,6 +117,12 @@ def main():
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
 
+	# Declare your color ranges like this:
+	black = (
+	(0,0,0), # Lower RGB
+	(50,50,50) # Upper RGB
+	)
+
 	# Raw color sensor test
 	print("Starting color sensor test...")
 	try:
@@ -130,17 +136,6 @@ def main():
 	except KeyboardInterrupt:
 		i = 0
 		print("Ending color sensor test")
-
-	#cl = ColorSensor()
-	#assert cl.connected, "Connect a sensor to any port"
-
-	#cl.mode='COL-COLOR'
-	#colors=('unknown','black','blue','green','yellow','red','white','brown')
-	#while True:
-	#	print(colors[cl.value()])
-	#	#Sound.speak(colors[cl.value()]).wait()
-	#	sleep(1)
-	#Sound.beep()
 
 	return 0
 
