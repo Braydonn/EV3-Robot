@@ -117,12 +117,6 @@ def main():
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
 
-	# Declare your color ranges like this:
-	black = (
-	(0,0,0), # Lower RGB
-	(50,50,50) # Upper RGB
-	)
-
 	# Raw color sensor test
 	print("Starting color sensor test...")
 	try:
@@ -133,6 +127,54 @@ def main():
 
 			i += 1
 			sleep(1)
+	except KeyboardInterrupt:
+		i = 0
+		print("Ending color sensor test")
+
+	# Color Range detection demo and test
+	print("Color Range Detection test starting...\n")
+
+	# Declare your color ranges like this:
+	black = (
+		(0,0,0), # Lower RGB
+		(50,50,50) # Upper RGB
+	)
+	green = (
+		(20,100,20), # Lower RGB
+		(100,255,100) # Upper RGB
+	)
+	white = (
+		(200,200,200), # Lower RGB
+		(255,255,255) # Upper RGB
+	)
+
+	try:
+		while True:
+			# Black
+			print(i+":")
+			if colorL.decodeColorRange(black) == True: # How to use the method
+				print("\tLeft sensor: black")
+			if colorR.decodeColorRange(black) == True:
+				print("\tRight sensor: black\n")
+			sleep(0.05)
+
+			# Green
+			print(i+":")
+			if colorL.decodeColorRange(green) == True:
+				print("\tLeft sensor: green")
+			if colorR.decodeColorRange(green) == True:
+				print("\tRight sensor: green\n")
+			sleep(0.05)
+
+			# White
+			print(i+":")
+			if colorL.decodeColorRange(white) == True:
+				print("\tLeft sensor: white")
+			if colorR.decodeColorRange(white) == True:
+				print("\tRight sensor: white\n")
+			sleep(0.05)
+
+			i+=1
 	except KeyboardInterrupt:
 		i = 0
 		print("Ending color sensor test")
