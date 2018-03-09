@@ -66,7 +66,7 @@ def main():
 				print("endzone")
 
 			#Check for bottle
-			else if infra.value() < '20':
+			else if infra.returnDistance() < '20':
 				print("bottle")
 				break
 
