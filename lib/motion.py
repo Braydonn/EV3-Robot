@@ -26,7 +26,7 @@ class largeMotor:
 		self.leftM.wait_while('running') # Stops program from running when motors are running
 
 
-	# Maybe instead of this, implement single motor control for more flexiblitiy
+	# Turning methods
 	def turnLeft(self,speed,position): # Turns left by activating right wheel
 		self.rightM.run_to_rel_pos(position_sp=position,speed_sp=speed,stop_action='hold')
 		self.rightM.wait_while('running')
@@ -35,12 +35,14 @@ class largeMotor:
 		self.leftM.run_to_rel_pos(position_sp=position, speed_sp=speed,stop_action='hold')
 		self.leftM.wait_while('running')
 
+
 	# Single motor control
 	def leftMotor(self,speed):
 		self.leftM.run_forever(speed_sp=speed,stop_action='brake')
 
 	def rightMotor(self,speed):
 		self.rightM.run_forever(speed_sp=speed,stop_action='brake')
+
 
 	# Control methods
 	def stop(self):

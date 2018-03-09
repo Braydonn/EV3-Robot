@@ -3,18 +3,16 @@
 
 from ev3dev.ev3 import *
 
-# Put yer' calibrations here
-
 class color:
 	'''Reads value from color sensors'''
 	# Can implement "tell me which side the green square is on" functionality
 
 	def __init__(self,port):
-		self.port = port # May not be needed
+		self.port = port
 		self.colors = ('unknown','black','blue','green','yellow','red','white','brown')
-		self.cl = ColorSensor(port) # Testing if objects will survive after initization of class
+		self.cl = ColorSensor(port)
 		self.cl.mode='COL-COLOR'
-		assert self.cl.connected, "Connect a color sensor to port " + port #May not work
+		assert self.cl.connected, "Connect a color sensor to port " + port
 
 		print('initialized color sensor')
 
