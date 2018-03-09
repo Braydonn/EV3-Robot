@@ -10,13 +10,6 @@ def main():
 	i = 0 # Needed for incremental functions
 	speed = 100 # Needed to set speed for algorithm test and D&R test
 
-	# For fun
-	name = "T-800"
-	banner = '''[0;1;34;94m▀▛▘[0m  [0;1;34;94m▞▀▖▞▀▖▞▀▖[0m
-	 [0;1;34;94m▌▄▄▖▚▄▘[0;34m▌▞▌▌▞▌[0m
-	 [0;34m▌[0m   [0;34m▌[0m [0;34m▌▛[0m [0;34m▌▛[0m [0;34m▌[0m
-	 [0;34m▘[0m   [0;34m▝▀[0m [0;37m▝▀[0m [0;37m▝▀[0m'''
-
 	# Should implement so that when you load the program, it waits for a button
 	# press to start moving. That way when starting the robot for the
 	# competition, you don't have to wait for the program to be loaded, as you
@@ -29,9 +22,7 @@ def main():
 	colorR = color('in4') # This sensor needs to be on the right for the turning test
 	infra = infrared('in3')
 
-	# say our name (sorry, no forced memes here)
-	print("Introducing the T-800 from Cyberdyne Systems")
-	Sound.speak("Introducing the T-800, from Cyberdyne Systems. Programmed by Skynet.")
+	# say our name
 	print("Press any button to start")
 
 	while btn.any()==False: # While no button is pressed.
@@ -54,32 +45,8 @@ def main():
 				motor.runForever(speed=speed)
 				i+=1
 
-			# Turn Left
-			if colorL.decodeColor() == 'green' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
-				motor.stop() # Stop motor before turning
-				print(str(i)+": turned left")
-				motor.leftMotor(speed=speed)
-				motor.rightMotor(speed=-speed)
-
-				sleep(1.5)
-				motor.runForever(speed=speed)
-
-				i += 1
-
-			# Turn right
-			if colorR.decodeColor() == 'green' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
-				motor.stop() # Stop motor before turning
-				print(str(i)+": turned right")
-				motor.leftMotor(speed=-speed)
-				motor.rightMotor(speed=speed)
-
-				sleep(1.5)
-				motor.runForever(speed=speed)
-
-				i += 1
-
 			# Line following (left bend)
-			if colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
+			else if colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
 				#motor.stop() # Stop motor before turning
 				print(str(i)+": left bend")
 				motor.leftMotor(speed=speed*0.25)
@@ -87,7 +54,7 @@ def main():
 				i += 1
 
 			# Line following (right bend)
-			if colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
+			else if colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
 				#motor.stop() # Stop motor before turning
 				print(str(i)+": right bend")
 				motor.rightMotor(speed=speed*0.25)
@@ -95,14 +62,38 @@ def main():
 				i += 1
 
 			# Check for endzone
-			if colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
+			else if colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
 				print("endzone")
 				
 			#Check for bottle
-			if infra.value() < '20':
+			if infra.returnDistance() < '20':
 				print("bottle")
-				
-			
+
+
+			# Turn Left
+			#if colorL.decodeColor() == 'green' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
+			#	motor.stop() # Stop motor before turning
+			#	print(str(i)+": turned left")
+			#	motor.leftMotor(speed=speed)
+			#	motor.rightMotor(speed=-speed)
+
+			#	sleep(1.5)
+			#	motor.runForever(speed=speed)
+
+			#	i += 1
+
+			# Turn right
+			#if colorR.decodeColor() == 'green' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
+			#	motor.stop() # Stop motor before turning
+			#	print(str(i)+": turned right")
+			#	motor.leftMotor(speed=-speed)
+			#	motor.rightMotor(speed=speed)
+
+			#	sleep(1.5)
+			#	motor.runForever(speed=speed)
+
+			#	i += 1
+
 			# Do a 360 degree scan
 			#if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'black':
 			#	print("Start scan")
@@ -120,7 +111,7 @@ def main():
 		motor.stop()
 		print("Finished Line Algorithm test v2 at "+str(i)+" steps.")
 		i=0
-		
+
 	print("Press any button on ev3 to continue")
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
