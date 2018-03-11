@@ -66,7 +66,7 @@ def main():
 				print("endzone")
 
 			#Check for bottle
-			elif infra.returnDistance() < '20':
+			elif infra.returnDistance() < 20:
 				print("bottle")
 				break
 
@@ -137,7 +137,7 @@ def main():
 	# Declare your color ranges like this:
 	black = (
 		(0,0,0), # Lower RGB
-		(50,50,50) # Upper RGB
+		(100,100,100) # Upper RGB
 	)
 	green = (
 		(20,100,20), # Lower RGB
@@ -151,7 +151,7 @@ def main():
 	try:
 		while True:
 			# Black
-			print(str(i)+":")
+			print(str(i)+": Red")
 			if colorL.decodeColorRange(black) == True: # How to use the method
 				print("\tLeft sensor: black")
 			if colorR.decodeColorRange(black) == True:
@@ -159,7 +159,7 @@ def main():
 			sleep(0.05)
 
 			# Green
-			print(str(i)+":")
+			print(str(i)+": Green")
 			if colorL.decodeColorRange(green) == True:
 				print("\tLeft sensor: green")
 			if colorR.decodeColorRange(green) == True:
@@ -167,12 +167,12 @@ def main():
 			sleep(0.05)
 
 			# White
-			print(str(i)+":")
+			print(str(i)+": Blue")
 			if colorL.decodeColorRange(white) == True:
 				print("\tLeft sensor: white")
 			if colorR.decodeColorRange(white) == True:
 				print("\tRight sensor: white\n")
-			sleep(0.05)
+			sleep(2)
 
 			i+=1
 	except KeyboardInterrupt:

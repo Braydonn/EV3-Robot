@@ -20,7 +20,7 @@ class color:
 		return self.colors[self.cl.value()]
 
 	# New and improved way of colour detection
-	def decodeColorRange(color):
+	def decodeColorRange(self,color):
 		# Red checking block
 		if color[0][0] < self.cl.value(0) and color[1][0] > self.cl.value(0): # Lower red value
 			print("Passed red") # For debugging
