@@ -46,7 +46,7 @@ def main():
 				i+=1
 
 			# Line following (left bend)
-			else if colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
+			elif colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
 				#motor.stop() # Stop motor before turning
 				print(str(i)+": left bend")
 				motor.leftMotor(speed=speed*0.25)
@@ -54,7 +54,7 @@ def main():
 				i += 1
 
 			# Line following (right bend)
-			else if colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
+			elif colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
 				#motor.stop() # Stop motor before turning
 				print(str(i)+": right bend")
 				motor.rightMotor(speed=speed*0.25)
@@ -62,11 +62,11 @@ def main():
 				i += 1
 
 			# Check for endzone
-			else if colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
+			elif colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
 				print("endzone")
 
 			#Check for bottle
-			else if infra.returnDistance() < '20':
+			elif infra.returnDistance() < '20':
 				print("bottle")
 				break
 
