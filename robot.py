@@ -151,7 +151,7 @@ def main():
 	try:
 		while True:
 			# Black
-			print(i+":")
+			print(str(i)+":")
 			if colorL.decodeColorRange(black) == True: # How to use the method
 				print("\tLeft sensor: black")
 			if colorR.decodeColorRange(black) == True:
@@ -159,7 +159,7 @@ def main():
 			sleep(0.05)
 
 			# Green
-			print(i+":")
+			print(str(i)+":")
 			if colorL.decodeColorRange(green) == True:
 				print("\tLeft sensor: green")
 			if colorR.decodeColorRange(green) == True:
@@ -167,7 +167,7 @@ def main():
 			sleep(0.05)
 
 			# White
-			print(i+":")
+			print(str(i)+":")
 			if colorL.decodeColorRange(white) == True:
 				print("\tLeft sensor: white")
 			if colorR.decodeColorRange(white) == True:
