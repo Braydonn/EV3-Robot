@@ -25,14 +25,16 @@ class color:
 		if color[0][0] < self.cl.value(0) and color[1][0] > self.cl.value(0): # Lower red value
 			print("Passed red") # For debugging
 		else:
-			print("Failed red")
+			red = self.cl.value(0)
+			print("Failed red"+str(red))
 			return False
 
 		# Green checking block
 		if color[0][1] < self.cl.value(1) and color[1][1] > self.cl.value(1): # Lower green value
 			print("Passed green")
 		else:
-			print("Failed green")
+			green = self.cl.value(1)
+			print("Failed green"+str(green))
 			return False
 
 		# Blue checking block
@@ -40,7 +42,8 @@ class color:
 			print("Passed blue")
 			return True # Passed all tests, color sensed is x color
 		else:
-			print("Failed blue")
+			blue = self.cl.value(2)
+			print("Failed blue"+str(blue))
 			return False
 
 
