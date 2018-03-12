@@ -28,46 +28,49 @@ def main():
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
 
-	# New Line following algorithm test
-	print("Starting Line Algorithm test v2...")
-	degrees = 800
-	motor.runForever(speed=speed)
+	#New Line following algorithm test
+	# print("Starting Line Algorithm test v2...")
+	# degrees = 800
+	# motor.runForever(speed=speed)
 
-	print(str(i)+": Started")
-	try:
-		while True:
-			i += 1
-			print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
+	# print(str(i)+": Started")
+	# try:
+		# while True:
+			# i += 1
+			# print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
 
-			# Go Straight
-			if colorL.decodeColor() == 'white' or colorL.decodeColor() == 'black' and colorR.decodeColor() == 'white' or colorR.decodeColor() == 'black':
-				print(str(i)+": Straight")
-				motor.runForever(speed=speed)
-				i+=1
+			#Go Straight
+			# if colorL.decodeColor() == 'white' or colorL.decodeColor() == 'black' and colorR.decodeColor() == 'white' or colorR.decodeColor() == 'black':
+				# print(str(i)+": Straight")
+				# motor.runForever(speed=speed)
+				# i+=1
 
-			# Line following (left bend)
-			elif colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
+			#Line following (left bend)
+			# elif colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
 				#motor.stop() # Stop motor before turning
-				print(str(i)+": left bend")
-				motor.leftMotor(speed=speed*0.25)
+				# print(str(i)+": left bend")
+				# motor.leftMotor(speed=speed*0.25)
 
-				i += 1
+				# i += 1
 
-			# Line following (right bend)
-			elif colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
+			#Line following (right bend)
+			# elif colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
 				#motor.stop() # Stop motor before turning
-				print(str(i)+": right bend")
-				motor.rightMotor(speed=speed*0.25)
+				# print(str(i)+": right bend")
+				# motor.rightMotor(speed=speed*0.25)
 
-				i += 1
+				# i += 1
 
-			# Check for endzone
-			elif colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
-				print("endzone")
+			#Check for endzone
+			# elif colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
+				# print("endzone")
 
 			#Check for bottle
 			elif infra.returnDistance() < 20:
+				motor.stop() #stop motor before turning
 				print("bottle")
+				motor.rightMotor(speed =
+				
 				break
 
 
