@@ -10,19 +10,13 @@ def main():
 	i = 0 # Needed for incremental functions
 	speed = 100 # Needed to set speed for algorithm test and D&R test
 
-	# Should implement so that when you load the program, it waits for a button
-	# press to start moving. That way when starting the robot for the
-	# competition, you don't have to wait for the program to be loaded, as you
-	# should have already done that before.
-
 	# Declare your objects here:
 	btn = Button()
 	motor = largeMotor(leftM='outA',rightM='outD')
 	colorL = color('in1') # This sensor needs to be on the left for the turning test
 	colorR = color('in4') # This sensor needs to be on the right for the turning test
 	infra = infrared('in3')
-
-	# say our name
+	
 	print("Press any button to start")
 
 	while btn.any()==False: # While no button is pressed.
@@ -112,34 +106,7 @@ def main():
 		print("Finished Line Algorithm test v2 at "+str(i)+" steps.")
 		i=0
 
-	print("Press any button on ev3 to continue")
-	while btn.any()==False: # While no button is pressed.
-		sleep(0.01)  # Wait 0.01 second
-
-	# Raw color sensor test
-	print("Starting color sensor test...")
-	try:
-		while True:
-			print(str(i)+":")
-			print("Left Color Sensor: "+colorL.decodeRawColor())
-			print("Right Color Sensor: "+colorR.decodeRawColor()+'\n')
-
-			i += 1
-			sleep(1)
-	except KeyboardInterrupt:
-		i = 0
-		print("Ending color sensor test")
-
-	#cl = ColorSensor()
-	#assert cl.connected, "Connect a sensor to any port"
-
-	#cl.mode='COL-COLOR'
-	#colors=('unknown','black','blue','green','yellow','red','white','brown')
-	#while True:
-	#	print(colors[cl.value()])
-	#	#Sound.speak(colors[cl.value()]).wait()
-	#	sleep(1)
-	#Sound.beep()
+	print("End of tests.")
 
 	return 0
 
