@@ -8,7 +8,7 @@ from lib import *
 
 def main():
 	i = 0 # Needed for incremental functions
-	speed = 100 # Needed to set speed for algorithm test and D&R test
+	speed = 150 # Needed to set speed for algorithm test and D&R test
 
 	# Declare your color ranges like this:
 	black = (
@@ -71,7 +71,7 @@ def main():
 
 			# Turn Left
 			elif colorL.decodeColorRange(green) and colorR.decodeColorRange(white):
-				motor.stop()  Stop motor before turning
+				motor.stop() # Stop motor before turning
 				print(str(i)+": turned left")
 				motor.leftMotor(speed=speed)
 				motor.rightMotor(speed=-speed)
@@ -83,7 +83,7 @@ def main():
 
 			# Turn right
 			elif colorR.decodeColorRange(green) and colorL.decodeColorRange(white):
-				motor.stop()  Stop motor before turning
+				motor.stop() # Stop motor before turning
 				print(str(i)+": turned right")
 				motor.leftMotor(speed=-speed)
 				motor.rightMotor(speed=speed)
