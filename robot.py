@@ -9,7 +9,7 @@ from lib import *
 def main():
 	i = 0 # Needed for incremental functions
 	speed = 100 # Needed to set speed for algorithm test and D&R test
-	
+
 	# Declare your color ranges like this:
 	black = (
 		(0,0,0), # Lower RGB
@@ -37,7 +37,7 @@ def main():
 		sleep(0.01)  # Wait 0.01 second
 
 	# New Line following algorithm test
-	print("Starting Line Algorithm test v2...")
+	print("Starting Line Algorithm test...")
 	degrees = 800
 	motor.runForever(speed=speed)
 
@@ -54,7 +54,7 @@ def main():
 				i+=1
 
 			# Line following (left bend)
-			elif colorL.decodeColorRange(black) and colorR.decodeColor() == 'white':
+			elif colorL.decodeColorRange(black) and colorR.decodeColor(white):
 				#motor.stop() # Stop motor before turning
 				print(str(i)+": left bend")
 				motor.leftMotor(speed=speed*0.25)
@@ -62,7 +62,7 @@ def main():
 				i += 1
 
 			# Line following (right bend)
-			elif colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
+			elif colorR.decodeColorRange(black) and colorL.decodeColor(white):
 				#motor.stop() # Stop motor before turning
 				print(str(i)+": right bend")
 				motor.rightMotor(speed=speed*0.25)
@@ -70,50 +70,47 @@ def main():
 				i += 1
 
 			# Turn Left
-			#if colorL.decodeColor() == 'green' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
-			#	motor.stop() # Stop motor before turning
-			#	print(str(i)+": turned left")
-			#	motor.leftMotor(speed=speed)
-			#	motor.rightMotor(speed=-speed)
+			elif colorL.decodeColorRange(green) and colorR.decodeColorRange(white):
+				motor.stop()  Stop motor before turning
+				print(str(i)+": turned left")
+				motor.leftMotor(speed=speed)
+				motor.rightMotor(speed=-speed)
 
-			#	sleep(1.5)
-			#	motor.runForever(speed=speed)
+				sleep(1.5)
+				motor.runForever(speed=speed)
 
-			#	i += 1
+				i += 1
 
 			# Turn right
-			#if colorR.decodeColor() == 'green' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
-			#	motor.stop() # Stop motor before turning
-			#	print(str(i)+": turned right")
-			#	motor.leftMotor(speed=-speed)
-			#	motor.rightMotor(speed=speed)
+			elif colorR.decodeColorRange(green) and colorL.decodeColorRange(white):
+				motor.stop()  Stop motor before turning
+				print(str(i)+": turned right")
+				motor.leftMotor(speed=-speed)
+				motor.rightMotor(speed=speed)
 
-			#	sleep(1.5)
-			#	motor.runForever(speed=speed)
+				sleep(1.5)
+				motor.runForever(speed=speed)
 
-			#	i += 1
+				i += 1
 
 			# Do a 360 degree scan
-			#if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'black':
-			#	print("Start scan")
-			#	x = True
-			#	while x == True:
-			#		motor.stop()
-			#		motor.leftMotor(speed=speed)
-			#		motor.rightMotor(speed=-speed)
+			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(black):
+				print("Start scan")
+				x = True
+				while x == True:
+					motor.stop()
+					motor.leftMotor(speed=speed)
+					motor.rightMotor(speed=-speed)
 
-			#		if colorL.decodeColor() == 'white' and colorR.decodeColor() == 'white':
-			#			print("End scan")
-			#			x = False
+					if colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
+						print("End scan")
+						x = False
 
 	except KeyboardInterrupt:
 		motor.stop()
 		print("Finished Line Algorithm test v2 at "+str(i)+" steps.")
 		i=0
 
-	print("Press any button on ev3 to continue")
-	while btn.any()==False: # While no button is pressed.
-		sleep(0.01)  # Wait 0.01 second
 
 	# Raw color sensor test
 	print("Starting color sensor test...")
@@ -159,7 +156,7 @@ def main():
 			if colorR.decodeColorRange(white) == True:
 				print("\tRight sensor: white\n")
 			sleep(2)
-			
+
 			print()
 
 			i+=1
