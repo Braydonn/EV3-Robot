@@ -26,7 +26,7 @@ class color:
 			print("Passed red") # For debugging
 		else:
 			red = self.cl.value(0)
-			print("Failed red"+str(red))
+			print("Failed red: "+str(red))
 			return False
 
 		# Green checking block
@@ -34,7 +34,7 @@ class color:
 			print("Passed green")
 		else:
 			green = self.cl.value(1)
-			print("Failed green"+str(green))
+			print("Failed green: "+str(green))
 			return False
 
 		# Blue checking block
@@ -43,7 +43,7 @@ class color:
 			return True # Passed all tests, color sensed is x color
 		else:
 			blue = self.cl.value(2)
-			print("Failed blue"+str(blue))
+			print("Failed blue: "+str(blue)+'\n\n')
 			return False
 
 

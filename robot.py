@@ -141,22 +141,23 @@ def main():
 	)
 	green = (
 		(20,100,20), # Lower RGB
-		(100,255,100) # Upper RGB
+		(150,1023,170) # Upper RGB
 	)
 	white = (
-		(200,200,200), # Lower RGB
-		(255,255,255) # Upper RGB
+		(200,200,160), # Lower RGB
+		(1023,1023,1023) # Upper RGB (max value for color sensor is 1023)
 	)
 
 	try:
 		while True:
 			# Black
-			print(str(i)+": Red")
+			print(str(i)+": Black")
 			if colorL.decodeColorRange(black) == True: # How to use the method
 				print("\tLeft sensor: black")
 			if colorR.decodeColorRange(black) == True:
 				print("\tRight sensor: black\n")
-			sleep(0.05)
+			sleep(2)
+			print()
 
 			# Green
 			print(str(i)+": Green")
@@ -164,15 +165,18 @@ def main():
 				print("\tLeft sensor: green")
 			if colorR.decodeColorRange(green) == True:
 				print("\tRight sensor: green\n")
-			sleep(0.05)
+			sleep(2)
+			print()
 
 			# White
-			print(str(i)+": Blue")
+			print(str(i)+": White")
 			if colorL.decodeColorRange(white) == True:
 				print("\tLeft sensor: white")
 			if colorR.decodeColorRange(white) == True:
 				print("\tRight sensor: white\n")
 			sleep(2)
+			
+			print()
 
 			i+=1
 	except KeyboardInterrupt:
