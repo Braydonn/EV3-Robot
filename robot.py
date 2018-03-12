@@ -9,7 +9,13 @@ from lib import *
 def main():
 	i = 0 # Needed for incremental functions
 	speed = 100 # Needed to set speed for algorithm test and D&R test
-
+	
+	#For tower:
+	rotate = 90/speed # For turning 90 Degrees
+	width = 200/speed # Used for going the width of the tower
+	length = 500/speed # Used for going the length of the tower
+	towerDistance = 20 # Distance from tower
+	turnSpeed = 2 # Used for turning around tower
 	# Should implement so that when you load the program, it waits for a button
 	# press to start moving. That way when starting the robot for the
 	# competition, you don't have to wait for the program to be loaded, as you
@@ -33,84 +39,53 @@ def main():
 	# degrees = 800
 	# motor.runForever(speed=speed)
 
-	# print(str(i)+": Started")
-	# try:
-		# while True:
-			# i += 1
-			# print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
-
-			#Go Straight
-			# if colorL.decodeColor() == 'white' or colorL.decodeColor() == 'black' and colorR.decodeColor() == 'white' or colorR.decodeColor() == 'black':
-				# print(str(i)+": Straight")
-				# motor.runForever(speed=speed)
-				# i+=1
-
-			#Line following (left bend)
-			# elif colorL.decodeColor() == 'black' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
-				#motor.stop() # Stop motor before turning
-				# print(str(i)+": left bend")
-				# motor.leftMotor(speed=speed*0.25)
-
-				# i += 1
-
-			#Line following (right bend)
-			# elif colorR.decodeColor() == 'black' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
-				#motor.stop() # Stop motor before turning
-				# print(str(i)+": right bend")
-				# motor.rightMotor(speed=speed*0.25)
-
-				# i += 1
-
-			#Check for endzone
-			# elif colorL.decodeColor() == 'green' and colorR.decodeColor() == 'green':
-				# print("endzone")
+	print(str(i)+": Started")
+	try:
+			while True:
+				i += 1
 
 			#Check for bottle
-			elif infra.returnDistance() < 20:
-				motor.stop() #stop motor before turning
-				print("bottle")
-				motor.rightMotor(speed =
-				
-				break
+				if infra.returnDistance() < towerDistance:
+					motor.stop() #stop motor before turning
+					print("bottle")
+					
+					#Rotate 90 degrees
+					motor.rightMotor(speed=speed*2)
+					motor.leftMotor(speed=speed*-2)
+					sleep(rotate) #The time it waits is based on speed so that a changed speed does not increase the distance
+					motor.stop()
+					
+					motor.runForever(speed=speed)
+					sleep(width)
+					motor.stop()
+					
+					motor.rightMotor(speed=speed*-2)
+					motor.leftMotor(speed=speed*2)
+					sleep(rotate)
+					motor.stop()
+					
+					#Move past tower
+					motor.runForever(speed=speed)
+					sleep(length)
+					motor.stop()
+					
+					motor.rightMotor(speed=speed*-2)
+					motor.leftMotor(speed=speed*2)
+					sleep(rotate) 
+					motor.stop()
+					
+					motor.runForever(speed=speed)
+					sleep(width)
+					motor.stop()
+					
+					motor.rightMotor(speed=speed*2)
+					motor.leftMotor(speed=speed*-2)
+					sleep(rotate)
+					motor.stop()
+					break
 
 
-			# Turn Left
-			#if colorL.decodeColor() == 'green' or colorL.decodeColor() == 'blue' and colorR.decodeColor() == 'white':
-			#	motor.stop() # Stop motor before turning
-			#	print(str(i)+": turned left")
-			#	motor.leftMotor(speed=speed)
-			#	motor.rightMotor(speed=-speed)
-
-			#	sleep(1.5)
-			#	motor.runForever(speed=speed)
-
-			#	i += 1
-
-			# Turn right
-			#if colorR.decodeColor() == 'green' or colorR.decodeColor() == 'blue' and colorL.decodeColor() == 'white':
-			#	motor.stop() # Stop motor before turning
-			#	print(str(i)+": turned right")
-			#	motor.leftMotor(speed=-speed)
-			#	motor.rightMotor(speed=speed)
-
-			#	sleep(1.5)
-			#	motor.runForever(speed=speed)
-
-			#	i += 1
-
-			# Do a 360 degree scan
-			#if colorL.decodeColor() == 'black' and colorR.decodeColor() == 'black':
-			#	print("Start scan")
-			#	x = True
-			#	while x == True:
-			#		motor.stop()
-			#		motor.leftMotor(speed=speed)
-			#		motor.rightMotor(speed=-speed)
-
-			#		if colorL.decodeColor() == 'white' and colorR.decodeColor() == 'white':
-			#			print("End scan")
-			#			x = False
-
+	
 	except KeyboardInterrupt:
 		motor.stop()
 		print("Finished Line Algorithm test v2 at "+str(i)+" steps.")
