@@ -25,11 +25,16 @@ def main():
 	)
 	
 	#For tower:
-	rotate = 90/speed # For turning 90 Degrees
+	rotate = 65/speed # For turning
 	width = 300/speed # Used for going the width of the tower
-	length =600/speed # Used for going the length of the tower
+	length =500/speed # Used for going the length of the tower
 	towerDistance = 30 # Distance from tower
 	turnSpeed = 2 # Used for turning around tower
+	
+	#For Endzone
+	canDist = 40 
+	
+	
 	# Should implement so that when you load the program, it waits for a button
 	# press to start moving. That way when starting the robot for the
 	# competition, you don't have to wait for the program to be loaded, as you
@@ -101,6 +106,18 @@ def main():
 				elif colorL.decodeColorRange(green) and colorR.decodeColorRange(green):
 					motor.stop()
 					print("Endzone")
+					
+					while True:
+						infra.returnDistance() > canDist
+						
+						print("Searching for can")
+						motor.rightMotor(speed=speed*2)
+						motor.leftMotor(speed=speed*-2)
+					
+					
+					motor.stop()
+					print("Found can")
+					break
 					
 					
 				# elif colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
