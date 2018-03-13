@@ -17,7 +17,7 @@ def main():
 	)
 	green = (
 		(0,195,0), # Lower RGB
-		(168,1023,130) # Upper RGB
+		(168,1023,140) # Upper RGB
 	)
 	white = (
 		(240,310,180), # Lower RGB
@@ -36,32 +36,6 @@ def main():
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
 
-	# Turn on green
-	i=0
-	print("Start green turn test.")
-	try:
-		while True:
-			sleep(2)
-			motor.runForever()
-			if colorL.decodeColorRange(green):
-				motor.stop() # Stop motor before turning
-				print("\r"+str(i)+": turned left")
-				motor.leftMotor(speed=speed)
-				motor.rightMotor(speed=-speed)
-
-				sleep(1.5)
-				motor.runForever(speed=speed)
-			elif colorR.decodeColorRange(green):
-				motor.stop() # Stop motor before turning
-				print("\r"+str(i)+": turned right")
-				motor.leftMotor(speed=-speed)
-				motor.rightMotor(speed=speed)
-
-				sleep(1.5)
-				motor.runForever(speed=speed)
-	except KeyboardInterrupt:
-		print("End green turn test.")
-			
 		
 	# New Line following algorithm test
 	print("Starting Line Algorithm test...")
@@ -71,7 +45,6 @@ def main():
 	print(str(i)+": Started")
 	try:
 		while True:
-			sleep(2)
 			i += 1
 			#print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
 
@@ -86,6 +59,7 @@ def main():
 				#motor.stop() # Stop motor before turning
 				print("\r"+str(i)+": left bend")
 				motor.leftMotor(speed=speed*0.25)
+				motor.rightMotor(speed=speed*1.25)
 
 				i += 1
 
@@ -93,6 +67,7 @@ def main():
 			elif colorR.decodeColorRange(black) and colorL.decodeColorRange(white):
 				#motor.stop() # Stop motor before turning
 				print("\r"+str(i)+": right bend")
+				motor.leftMotor(speed=speed*1.25)
 				motor.rightMotor(speed=speed*0.25)
 
 				i += 1
@@ -101,10 +76,10 @@ def main():
 			elif colorL.decodeColorRange(green) and colorR.decodeColorRange(white):
 				motor.stop() # Stop motor before turning
 				print("\r"+str(i)+": turned left")
-				motor.leftMotor(speed=speed)
-				motor.rightMotor(speed=-speed)
+				motor.leftMotor(speed=-speed)
+				motor.rightMotor(speed=speed)
 
-				sleep(1.5)
+				sleep(1.2)
 				motor.runForever(speed=speed)
 
 				i += 1
@@ -113,10 +88,10 @@ def main():
 			elif colorR.decodeColorRange(green) and colorL.decodeColorRange(white):
 				motor.stop() # Stop motor before turning
 				print("\r"+str(i)+": turned right")
-				motor.leftMotor(speed=-speed)
-				motor.rightMotor(speed=speed)
+				motor.leftMotor(speed=speed)
+				motor.rightMotor(speed=-speed)
 
-				sleep(1.5)
+				sleep(1.2)
 				motor.runForever(speed=speed)
 
 				i += 1
