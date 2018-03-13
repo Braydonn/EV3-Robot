@@ -45,7 +45,7 @@ def main():
 	try:
 		while True:
 			i += 1
-			print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
+			#print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
 
 			# Go Straight
 			if colorL.decodeColorRange(black) and colorR.decodeColorRange(white):
@@ -54,7 +54,7 @@ def main():
 				i+=1
 
 			# Line following (left bend)
-			elif colorL.decodeColorRange(black) and colorR.decodeColor(white):
+			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(white):
 				#motor.stop() # Stop motor before turning
 				print(str(i)+": left bend")
 				motor.leftMotor(speed=speed*0.25)
@@ -62,7 +62,7 @@ def main():
 				i += 1
 
 			# Line following (right bend)
-			elif colorR.decodeColorRange(black) and colorL.decodeColor(white):
+			elif colorR.decodeColorRange(black) and colorL.decodeColorRange(white):
 				#motor.stop() # Stop motor before turning
 				print(str(i)+": right bend")
 				motor.rightMotor(speed=speed*0.25)
@@ -93,18 +93,6 @@ def main():
 
 				i += 1
 
-			# Do a 360 degree scan
-			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(black):
-				print("Start scan")
-				x = True
-				while x == True:
-					motor.stop()
-					motor.leftMotor(speed=speed)
-					motor.rightMotor(speed=-speed)
-
-					if colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
-						print("End scan")
-						x = False
 
 	except KeyboardInterrupt:
 		motor.stop()
