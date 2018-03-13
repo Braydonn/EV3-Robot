@@ -10,11 +10,25 @@ def main():
 	i = 0 # Needed for incremental functions
 	speed = 100 # Needed to set speed for algorithm test and D&R test
 	
+	#Color range
+	black = (
+		(0,0,0), # lower RGB
+		(60,65,54) # upper RGB
+	)
+	green = (
+		(0,195,0),
+		(170,1023,130)
+	)
+	white = (
+		(360,310,180),
+		(1023,1023,1023)
+	)
+	
 	#For tower:
 	rotate = 90/speed # For turning 90 Degrees
-	width = 200/speed # Used for going the width of the tower
-	length = 500/speed # Used for going the length of the tower
-	towerDistance = 20 # Distance from tower
+	width = 300/speed # Used for going the width of the tower
+	length =600/speed # Used for going the length of the tower
+	towerDistance = 30 # Distance from tower
 	turnSpeed = 2 # Used for turning around tower
 	# Should implement so that when you load the program, it waits for a button
 	# press to start moving. That way when starting the robot for the
@@ -82,9 +96,18 @@ def main():
 					motor.leftMotor(speed=speed*-2)
 					sleep(rotate)
 					motor.stop()
-					break
+					
 
-
+				elif colorL.decodeColorRange(green) and colorR.decodeColorRange(green):
+					motor.stop()
+					print("Endzone")
+					
+					
+				# elif colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
+					# print("Runforever")
+					# motor.runForever(speed=speed)
+	
+	
 	
 	except KeyboardInterrupt:
 		motor.stop()

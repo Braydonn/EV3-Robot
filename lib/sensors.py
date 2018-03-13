@@ -21,6 +21,8 @@ class color:
 
 	# New and improved way of colour detection
 	def decodeColorRange(self,color):
+		# Set mode of color sensor
+		self.cl.mode='RGB-RAW'
 		# Red checking block
 		if color[0][0] < self.cl.value(0) and color[1][0] > self.cl.value(0): # Lower red value
 			print("Passed red") # For debugging
