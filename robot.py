@@ -20,7 +20,7 @@ def main():
 		(168,1023,140) # Upper RGB
 	)
 	white = (
-		(240,310,180), # Lower RGB
+		(220,310,175), # Lower RGB
 		(1023,1023,1023) # Upper RGB (max value for color sensor is 1023)
 	)
 
@@ -37,72 +37,6 @@ def main():
 		sleep(0.01)  # Wait 0.01 second
 
 		
-	# New Line following algorithm test
-	print("Starting Line Algorithm test...")
-	degrees = 800
-	motor.runForever(speed=speed)
-
-	print(str(i)+": Started")
-	try:
-		while True:
-			i += 1
-			#print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
-
-			# Go Straight
-			if colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
-				print("\r"+str(i)+": Straight")
-				motor.runForever(speed=speed)
-				i+=1
-
-			# Line following (left bend)
-			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(white):
-				#motor.stop() # Stop motor before turning
-				print("\r"+str(i)+": left bend")
-				motor.leftMotor(speed=speed*0.25)
-				motor.rightMotor(speed=speed*1.25)
-
-				i += 1
-
-			# Line following (right bend)
-			elif colorR.decodeColorRange(black) and colorL.decodeColorRange(white):
-				#motor.stop() # Stop motor before turning
-				print("\r"+str(i)+": right bend")
-				motor.leftMotor(speed=speed*1.25)
-				motor.rightMotor(speed=speed*0.25)
-
-				i += 1
-
-			# Turn Left
-			elif colorL.decodeColorRange(green) and colorR.decodeColorRange(white):
-				motor.stop() # Stop motor before turning
-				print("\r"+str(i)+": turned left")
-				motor.leftMotor(speed=-speed)
-				motor.rightMotor(speed=speed)
-
-				sleep(1.2)
-				motor.runForever(speed=speed)
-
-				i += 1
-
-			# Turn right
-			elif colorR.decodeColorRange(green) and colorL.decodeColorRange(white):
-				motor.stop() # Stop motor before turning
-				print("\r"+str(i)+": turned right")
-				motor.leftMotor(speed=speed)
-				motor.rightMotor(speed=-speed)
-
-				sleep(1.2)
-				motor.runForever(speed=speed)
-
-				i += 1
-
-
-	except KeyboardInterrupt:
-		motor.stop()
-		print("Finished Line Algorithm test v2 at "+str(i)+" steps.")
-		i=0
-
-
 	# Raw color sensor test
 	print("Starting color sensor test...")
 	try:
