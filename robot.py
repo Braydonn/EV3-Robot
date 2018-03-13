@@ -17,7 +17,7 @@ def main():
 	)
 	green = (
 		(0,195,0), # Lower RGB
-		(100,1023,130) # Upper RGB
+		(168,1023,130) # Upper RGB
 	)
 	white = (
 		(240,310,180), # Lower RGB
@@ -36,6 +36,33 @@ def main():
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
 
+	# Turn on green
+	i=0
+	print("Start green turn test.")
+	try:
+		while True:
+			sleep(2)
+			motor.runForever()
+			if colorL.decodeColorRange(green):
+				motor.stop() # Stop motor before turning
+				print("\r"+str(i)+": turned left")
+				motor.leftMotor(speed=speed)
+				motor.rightMotor(speed=-speed)
+
+				sleep(1.5)
+				motor.runForever(speed=speed)
+			elif colorR.decodeColorRange(green):
+				motor.stop() # Stop motor before turning
+				print("\r"+str(i)+": turned right")
+				motor.leftMotor(speed=-speed)
+				motor.rightMotor(speed=speed)
+
+				sleep(1.5)
+				motor.runForever(speed=speed)
+	except KeyboardInterrupt:
+		print("End green turn test.")
+			
+		
 	# New Line following algorithm test
 	print("Starting Line Algorithm test...")
 	degrees = 800
@@ -44,19 +71,20 @@ def main():
 	print(str(i)+": Started")
 	try:
 		while True:
+			sleep(2)
 			i += 1
 			#print("\n"+str(i)+": cL "+colorL.decodeColor()+"\t cR: "+colorR.decodeColor())
 
 			# Go Straight
-			if colorL.decodeColorRange(black) and colorR.decodeColorRange(white):
-				print(str(i)+": Straight")
+			if colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
+				print("\r"+str(i)+": Straight")
 				motor.runForever(speed=speed)
 				i+=1
 
 			# Line following (left bend)
 			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(white):
 				#motor.stop() # Stop motor before turning
-				print(str(i)+": left bend")
+				print("\r"+str(i)+": left bend")
 				motor.leftMotor(speed=speed*0.25)
 
 				i += 1
@@ -64,7 +92,7 @@ def main():
 			# Line following (right bend)
 			elif colorR.decodeColorRange(black) and colorL.decodeColorRange(white):
 				#motor.stop() # Stop motor before turning
-				print(str(i)+": right bend")
+				print("\r"+str(i)+": right bend")
 				motor.rightMotor(speed=speed*0.25)
 
 				i += 1
@@ -72,7 +100,7 @@ def main():
 			# Turn Left
 			elif colorL.decodeColorRange(green) and colorR.decodeColorRange(white):
 				motor.stop() # Stop motor before turning
-				print(str(i)+": turned left")
+				print("\r"+str(i)+": turned left")
 				motor.leftMotor(speed=speed)
 				motor.rightMotor(speed=-speed)
 
@@ -84,7 +112,7 @@ def main():
 			# Turn right
 			elif colorR.decodeColorRange(green) and colorL.decodeColorRange(white):
 				motor.stop() # Stop motor before turning
-				print(str(i)+": turned right")
+				print("\r"+str(i)+": turned right")
 				motor.leftMotor(speed=-speed)
 				motor.rightMotor(speed=speed)
 
