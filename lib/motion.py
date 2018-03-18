@@ -33,9 +33,9 @@ class largeMotor:
 		self.rightM.wait_while('running')
 
 	def turnRight(self,speed,position): # Turns right by activating left wheel
-		self.leftM.run_to_rel_pos(position_sp=position, speed_sp=speed,stop_action='hold')
-		self.leftM.run_to_rel_pos(position_sp=-position,speed_sp=speed,stop_action='hold')
-		self.leftM.wait_while('running')
+		self.leftM.run_to_rel_pos(position_sp=position,speed_sp=speed,stop_action='hold')
+		self.rightM.run_to_rel_pos(position_sp=-position,speed_sp=speed,stop_action='hold')
+		self.rightM.wait_while('running')
 
 
 	# Single motor control

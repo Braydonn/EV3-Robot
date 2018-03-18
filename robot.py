@@ -9,6 +9,7 @@ from lib import *
 def main():
 	i = 0 # Needed for incremental functions
 	speed = 150 # Needed to set speed for algorithm test and D&R test
+	position = 100
 
 	# Declare your color ranges like this:
 	black = (
@@ -38,22 +39,15 @@ def main():
 
 	print("start line algorithm test")
 	try:
-		while True:
-			if colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
-				motor.stop()
-				motor.runForever(speed)
-			
+		while True:			
 			if colorL.decodeColorRange(black):
 				motor.stop()
-				motor.leftMotor(speed=-speed)
-				motor.rightMotor(speed=speed)
-				sleep(0.01)
-				
-			if colorR.decodeColorRange(black):
+				motor.turnLeft(speed=speed,position=position)
+			elif colorR.decodeColorRange(black):
 				motor.stop()
-				motor.leftMotor(speed=speed)
-				motor.rightMotor(speed=-speed)
-				sleep(0.01)
+				motor.turnRight(speed=speed,position=position)
+			else:
+				motor.runForever(speed=speed)
 	except KeyboardInterrupt:
 		print("end line algorithm test")
 	

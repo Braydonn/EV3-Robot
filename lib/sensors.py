@@ -17,6 +17,7 @@ class color:
 		print('initialized color sensor')
 
 	def decodeColor(self):
+		self.cl.mode='COL-COLOR'
 		return self.colors[self.cl.value()]
 
 	# New and improved way of colour detection
