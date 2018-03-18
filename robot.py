@@ -36,23 +36,8 @@ def main():
 
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
-
-	print("start line algorithm test")
-	try:
-		while True:			
-			if colorL.decodeColorRange(black):
-				motor.stop()
-				motor.turnLeft(speed=speed,position=position)
-			elif colorR.decodeColorRange(black):
-				motor.stop()
-				motor.turnRight(speed=speed,position=position)
-			else:
-				motor.runForever(speed=speed)
-	except KeyboardInterrupt:
-		print("end line algorithm test")
-	
-	
-	# Raw color sensor test
+		
+		# Raw color sensor test
 	print("Starting color sensor test...")
 	try:
 		while True:
@@ -103,6 +88,21 @@ def main():
 	except KeyboardInterrupt:
 		i = 0
 		print("Ending color sensor test")
+
+	print("start line algorithm test")
+	try:
+		while True:			
+			if colorL.decodeColorRange(black):
+				motor.stop()
+				motor.turnLeft(speed=speed,position=position)
+			elif colorR.decodeColorRange(black):
+				motor.stop()
+				motor.turnRight(speed=speed,position=position)
+			else:
+				motor.runForever(speed=speed)
+	except KeyboardInterrupt:
+		print("end line algorithm test")
+
 
 	return 0
 
