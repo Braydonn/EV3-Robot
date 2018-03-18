@@ -17,7 +17,7 @@ def main():
 	)
 	green = (
 		(0,195,0),
-		(170,1023,130)
+		(190,1023,130)
 	)
 	white = (
 		(360,310,180),
@@ -108,14 +108,15 @@ def main():
 					print("Endzone")
 					
 					while True:
-						infra.returnDistance() > canDist
+						if infra.returnDistance() > canDist:
 						
-						print("Searching for can")
-						motor.rightMotor(speed=speed*2)
-						motor.leftMotor(speed=speed*-2)
+							print("Searching for can")
+							motor.rightMotor(speed=speed*2)
+							motor.leftMotor(speed=speed*-2)
 					
 					
-					motor.stop()
+						else:
+							motor.stop()
 					print("Found can")
 					break
 					
