@@ -33,6 +33,7 @@ def main():
 	
 	#For Endzone
 	canDist = 40 
+	canDistGrab = 2
 	
 	
 	# Should implement so that when you load the program, it waits for a button
@@ -116,8 +117,13 @@ def main():
 					
 					
 						else:
-							motor.stop()
+							break
+							
 					print("Found can")
+					while True:
+						if infra.returnDistance() > canDistGrab:
+							
+					
 					break
 					
 					
