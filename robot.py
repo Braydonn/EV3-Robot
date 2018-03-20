@@ -33,7 +33,7 @@ def main():
 	
 	#For Endzone
 	canDist = 40 
-	canDistGrab = 2
+	canDistGrab = 0
 	
 	
 	# Should implement so that when you load the program, it waits for a button
@@ -127,7 +127,9 @@ def main():
 							break
 						else:
 							print("Going to can")
+					sleep(10/speed)
 					motor.stop()
+					
 					break
 					
 				# elif colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
