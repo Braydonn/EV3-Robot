@@ -108,24 +108,27 @@ def main():
 					motor.stop()
 					print("Endzone")
 					
-					while True:
-						if infra.returnDistance() > canDist:
-						
-							print("Searching for can")
-							motor.rightMotor(speed=speed*2)
-							motor.leftMotor(speed=speed*-2)
+					motor.rightMotor(speed=speed*2)
+					motor.leftMotor(speed=speed*-2)
 					
+					while True:	
+						if infra.returnDistance() < canDist:
+							break
 					
 						else:
-							break
-							
+							print("Searching for can")
+					
+					sleep(10/speed)
+					motor.stop()
 					print("Found can")
+					motor.runForever(speed=speed)
 					while True:
-						if infra.returnDistance() > canDistGrab:
-							
-					
+						if infra.returnDistance() < canDistGrab:
+							break
+						else:
+							print("Going to can")
+					motor.stop()
 					break
-					
 					
 				# elif colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
 					# print("Runforever")
