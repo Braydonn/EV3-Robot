@@ -17,7 +17,7 @@ def main():
 	)
 	green = (
 		(0,195,0),
-		(190,1023,130)
+		(190,1023,140)
 	)
 	white = (
 		(360,310,180),
@@ -33,7 +33,7 @@ def main():
 	
 	#For Endzone
 	canDist = 40 
-	canDistGrab = 0
+	canDistGrab = 2
 	
 	
 	# Should implement so that when you load the program, it waits for a button
@@ -132,9 +132,9 @@ def main():
 					
 					break
 					
-				# elif colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
-					# print("Runforever")
-					# motor.runForever(speed=speed)
+	except KeyboardInterrupt:
+		motor.stop()
+		print("end line algorithm test")
 	
 	return 0
 
