@@ -9,12 +9,12 @@ from lib import *
 def main():
 	i = 0 # Needed for incremental functions
 	speed = 150 # Needed to set speed for algorithm test and D&R test
-	position = 25
+	position = 10
 
 	# Declare your color ranges like this:
 	black = (
 		(0,0,0), # Lower RGB
-		(60,65,54) # Upper RGB
+		(65,65,54) # Upper RGB
 	)
 	green = (
 		(0,190,0), # Lower RGB
@@ -37,19 +37,6 @@ def main():
 	while btn.any()==False: # While no button is pressed.
 		sleep(0.01)  # Wait 0.01 second
 		
-		# Raw color sensor test
-	print("Starting color sensor test...")
-	try:
-		while True:
-			print(str(i)+":")
-			print("Left Color Sensor: "+colorL.decodeRawColor())
-			print("Right Color Sensor: "+colorR.decodeRawColor()+'\n')
-
-			i += 1
-			sleep(1)
-	except KeyboardInterrupt:
-		i = 0
-		print("Ending color sensor test")
 
 	# Color Range detection demo and test
 	print("Color Range Detection test starting...\n")
@@ -98,16 +85,16 @@ def main():
 			elif colorR.decodeColorRange(black):
 				motor.stop()
 				motor.turnRight(speed=speed,position=position)
-			elif colorL.decodeColorRange(green):
-				motor.stop()
-				print("turn left!")
-				motor.turnLeft(speed=speed,position=150)
-				motor.runTimed(speed=speed,time=1000)
-			elif colorR.decodeColorRange(green):
-				motor.stop()
-				print("turn right!")
-				motor.turnRight(speed=speed,position=150)
-				motor.runTimed(speed=speed,time=1000)
+			#elif colorL.decodeColorRange(green):
+			#	motor.stop()
+			#	print("turn left!")
+			#	motor.turnLeft(speed=speed,position=150)
+			#	motor.runTimed(speed=speed,time=1000)
+			#elif colorR.decodeColorRange(green):
+			#	motor.stop()
+			#	print("turn right!")
+			#	motor.turnRight(speed=speed,position=150)
+			#	motor.runTimed(speed=speed,time=1000)
 			else:
 				motor.runForever(speed=speed)
 	except KeyboardInterrupt:
