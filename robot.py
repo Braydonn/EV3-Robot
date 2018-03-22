@@ -43,35 +43,29 @@ def main():
 
 	try:
 		while True:
-			# Black
-			print(str(i)+": Black")
-			if colorL.decodeColorRange(black) == True: # How to use the method
-				print("\tLeft sensor: black")
-			if colorR.decodeColorRange(black) == True:
-				print("\tRight sensor: black\n")
-			sleep(2)
-			print()
+			# Straight
+			if colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
+				motor.runForever(speed=speed)
 
-			# Green
-			print(str(i)+": Green")
-			if colorL.decodeColorRange(green) == True:
-				print("\tLeft sensor: green")
-			if colorR.decodeColorRange(green) == True:
-				print("\tRight sensor: green\n")
-			sleep(2)
-			print()
-
-			# White
-			print(str(i)+": White")
-			if colorL.decodeColorRange(white) == True:
-				print("\tLeft sensor: white")
-			if colorR.decodeColorRange(white) == True:
-				print("\tRight sensor: white\n")
-			sleep(2)
-
-			print()
-
-			i+=1
+			# Right bend
+			elif colorR.decodeColorRange(black) and colorL.decodeColorRange(white):
+				motor.turnRight(speed=speed,position=50)
+				motor.runTimed(speed=speed,time=300)
+			# Left bend
+			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(white):
+				motor.turnLeft(speed=speed,position=50)
+				motor.runTimed(speed=speed,time=300)
+			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(black):
+				motor.runTimed(speed=speed,time=500)
+				
+				# Turn right
+				if colorR.decodeColorRange(green):
+					motor.turnRight(speed=speed,position=150)
+					motor.runTimed(speed=speed,time=1000)
+				# Else, turn left
+				else:
+					motor.turnLeft(speeed=speeed,position=150)
+					motor.runTimed(speed=speed,time=1000)
 	except KeyboardInterrupt:
 		i = 0
 		print("Ending color sensor test")
