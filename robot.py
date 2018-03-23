@@ -24,17 +24,19 @@ def main():
 		(1023,1023,1023)
 	)
 	
-	#For tower:
-	rotate = 65/speed # For turning
-	width = 300/speed # Used for going the width of the tower
-	length =500/speed # Used for going the length of the tower
-	towerDistance = 30 # Distance from tower
-	turnSpeed = 2 # Used for turning around tower
+	#For watertower:
+	wtRotate = 65/speed # For turning
+	wtWidth = 300/speed # Used for going the width of the tower
+	wtLength =500/speed # Used for going the length of the tower
+	wtDist = 30 # Distance from tower
+	wtTurnSpeed = speed*2 # Used for turning around tower
 	
-	#For Endzone
-	canDist = 40 
-	canDistGrab = 2
+	#For Endzone:
+	canDist = 40
+	canGrabDist = 4
 	
+	platformDist = 30
+	platormPlaceDist = 4
 	
 	# Should implement so that when you load the program, it waits for a button
 	# press to start moving. That way when starting the robot for the
@@ -44,6 +46,7 @@ def main():
 	# Declare your objects here:
 	btn = Button()
 	motor = largeMotor(leftM='outA',rightM='outD')
+	tacho = tachoMotor(leftM='outB',rightM='outC')
 	colorL = color('in1') # This sensor needs to be on the left for the turning test
 	colorR = color('in4') # This sensor needs to be on the right for the turning test
 	infra = infrared('in3')
@@ -59,58 +62,62 @@ def main():
 	# degrees = 800
 	# motor.runForever(speed=speed)
 
+	# tacho.grip(position=-500,speed=200) # Negative position pulls can down
+	# tacho.stop()
+	
 	print(str(i)+": Started")
 	try:
 			while True:
 				i += 1
 
-			#Check for bottle
-				if infra.returnDistance() < towerDistance:
+				#Check for bottle
+				if infra.returnDistance() < wtDist:
 					motor.stop() #stop motor before turning
 					print("bottle")
 					
-					#Rotate 90 degrees
-					motor.rightMotor(speed=speed*2)
-					motor.leftMotor(speed=speed*-2)
-					sleep(rotate) #The time it waits is based on speed so that a changed speed does not increase the distance
+					#Rotate
+					motor.rightMotor(speed=wtTurnSpeed)
+					motor.leftMotor(speed=-wtTurnSpeed)
+					sleep(wtRotate) #The time it waits is based on speed so that a changed speed does not increase the distance
 					motor.stop()
 					
 					motor.runForever(speed=speed)
-					sleep(width)
+					sleep(wtWidth)
 					motor.stop()
 					
-					motor.rightMotor(speed=speed*-2)
-					motor.leftMotor(speed=speed*2)
-					sleep(rotate)
+					motor.rightMotor(speed=-wtTurnSpeed)
+					motor.leftMotor(speed=wtTurnSpeed)
+					sleep(wtRotate)
 					motor.stop()
 					
 					#Move past tower
 					motor.runForever(speed=speed)
-					sleep(length)
+					sleep(wtLength)
 					motor.stop()
 					
-					motor.rightMotor(speed=speed*-2)
-					motor.leftMotor(speed=speed*2)
-					sleep(rotate) 
+					#Rotate
+					motor.rightMotor(speed=-wtTurnSpeed)
+					motor.leftMotor(speed=wtTurnSpeed)
+					sleep(wtRotate) 
 					motor.stop()
 					
 					motor.runForever(speed=speed)
-					sleep(width)
+					sleep(wtWidth)
 					motor.stop()
 					
-					motor.rightMotor(speed=speed*2)
-					motor.leftMotor(speed=speed*-2)
-					sleep(rotate)
+					motor.rightMotor(speed=wtTurnSpeed)
+					motor.leftMotor(speed=-wtTurnSpeed)
+					sleep(wtRotate)
 					motor.stop()
 					
-
+				#Test for endzone
 				elif colorL.decodeColorRange(green) and colorR.decodeColorRange(green):
 					motor.stop()
 					print("Endzone")
 					
+					#Search for can
 					motor.rightMotor(speed=speed*2)
 					motor.leftMotor(speed=speed*-2)
-					
 					while True:	
 						if infra.returnDistance() < canDist:
 							break
@@ -121,14 +128,48 @@ def main():
 					sleep(10/speed)
 					motor.stop()
 					print("Found can")
+					
+					#Go to can
 					motor.runForever(speed=speed)
 					while True:
-						if infra.returnDistance() < canDistGrab:
+						if infra.returnDistance() < canGrabDist:
 							break
 						else:
 							print("Going to can")
+					sleep(15/speed)
+					motor.stop()
+					
+					#Pickup can
+					tacho.grip(position=180,speed=150)
+					tacho.stop
+					
+					#Search for platform
+					motor.rightMotor(speed=speed*2)
+					motor.leftMotor(speed=speed*-2)
+					while True:	
+						if infra.returnDistance() < platformDist:
+							break
+					
+						else:
+							print("Searching for platform")
+							
 					sleep(10/speed)
 					motor.stop()
+					print("Found platform")
+					
+					#Go to platform
+					motor.runForever(speed=speed)
+					while True:
+						if infra.returnDistance() < platormPlaceDist:
+							break
+						else:
+							print("Going to platform")
+					sleep(15/speed)
+					motor.stop()
+					
+					#Put down can
+					tacho.grip(position=180,speed=150)
+					tacho.stop
 					
 					break
 					

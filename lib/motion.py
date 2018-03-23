@@ -61,12 +61,23 @@ class largeMotor:
 
 class tachoMotor:
 	'''For gripper'''
-	def __init__(self,port):
+	def __init__(self,leftM,rightM):
 		# Creating motor object:
-		self.motor = Motor(port)
-
+		self.leftM = Motor(leftM)
+		self.rightM = Motor(rightM)
+		
 		print("initializing object")
 
 	def grip(self,position,speed):
-		self.motor.run_to_rel_pos(position_sp=position,speed_sp=speed,stop_action="hold")
+		self.leftM.stop()
+		self.rightM.stop()
+		
+		self.leftM.run_to_rel_pos(position_sp=position,speed_sp=speed,stop_action="hold")
+		self.rightM.run_to_rel_pos(position_sp=-position,speed_sp=speed,stop_action="hold")
+		self.leftM.wait_while('running')
+		
 		print("Gripping at "+str(position)+" with a speed of "+str(speed))
+
+	def stop(self):
+		self.leftM.stop(stop_action="brake")
+		self.rightM.stop(stop_action="brake")
