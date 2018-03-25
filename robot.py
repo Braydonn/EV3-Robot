@@ -55,17 +55,20 @@ def main():
 			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(white):
 				motor.turnLeft(speed=speed,position=50)
 				motor.runTimed(speed=speed,time=300)
+			# Turning code
 			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(black):
-				motor.runTimed(speed=speed,time=500)
+				motor.runTimed(speed=-speed,time=250)
 				
 				# Turn right
 				if colorR.decodeColorRange(green):
 					motor.turnRight(speed=speed,position=150)
 					motor.runTimed(speed=speed,time=1000)
 				# Else, turn left
-				else:
+				elif colorL.decodeColorRange(green):
 					motor.turnLeft(speeed=speeed,position=150)
 					motor.runTimed(speed=speed,time=1000)
+				else:
+					motor.runForever(speed=speed)
 	except KeyboardInterrupt:
 		i = 0
 		print("Ending color sensor test")
