@@ -9,7 +9,7 @@ from lib import *
 def main():
 	i = 0 # Needed for incremental functions
 	speed = 150 # Needed to set speed for algorithm test and D&R test
-	position = 50
+	position = 60
 
 	# Declare your color ranges like this:
 	black = (
@@ -51,12 +51,12 @@ def main():
 			# Right bend
 			elif colorR.decodeColorRange(black,"black") and colorL.decodeColorRange(white,"white"):
 				motor.turnRight(speed=speed,position=position)
-				motor.runTimed(speed=speed,time=100)
+				motor.runTimed(speed=speed,time=80)
 				print("Right Bend")
 			# Left bend
 			elif colorL.decodeColorRange(black,"black") and colorR.decodeColorRange(white,"white"):
 				motor.turnLeft(speed=speed,position=position)
-				motor.runTimed(speed=speed,time=100)
+				motor.runTimed(speed=speed,time=80)
 				print("Left Bend")
 			# Turning code
 			#elif colorL.decodeColorRange(black) and colorR.decodeColorRange(black):
@@ -64,14 +64,16 @@ def main():
 				
 			# Turn right
 			elif colorR.decodeColorRange(green,"green"):
-				motor.runTimed(speed=speed,time=400)
+				motor.runTimed(speed=speed,time=200)
 				motor.turnRight(speed=speed,position=152)
+				motor.runTimed(speed=speed,time=100)
 				#motor.runTimed(speed=speed,time=1000)
 				print("Turn Right")
 			# Else, turn left
 			elif colorL.decodeColorRange(green,"green"):
-				motor.runTimed(speed=speed,time=400)
+				motor.runTimed(speed=speed,time=200)
 				motor.turnLeft(speed=speed,position=152)
+				motor.runTimed(speed=speed,time=100)
 				#motor.runTimed(speed=speed,time=1000)
 				print("Turn Left")
 			else:
