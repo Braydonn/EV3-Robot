@@ -35,6 +35,15 @@ class largeMotor:
 	def turnRight(self,speed,position): # Turns right by activating left wheel
 		self.leftM.run_to_rel_pos(position_sp=-position,speed_sp=speed,stop_action='hold')
 		self.rightM.run_to_rel_pos(position_sp=position,speed_sp=speed,stop_action='hold')
+=======
+		self.rightM.run_to_rel_pos(position_sp=position,speed_sp=-speed,stop_action='hold')
+		self.leftM.run_to_rel_pos(position_sp=-position,speed_sp=-speed,stop_action='hold')
+		self.rightM.wait_while('running')
+
+	def turnRight(self,speed,position): # Turns right by activating left wheel
+		self.leftM.run_to_rel_pos(position_sp=position,speed_sp=-speed,stop_action='hold')
+		self.rightM.run_to_rel_pos(position_sp=-position,speed_sp=-speed,stop_action='hold')
+>>>>>>> a697286c83c2b537a0167b95357b3c1623ac311a
 		self.rightM.wait_while('running')
 
 
