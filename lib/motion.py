@@ -15,26 +15,26 @@ class largeMotor:
 	def runForever(self,speed):
 		# Doesn't have wait_while block as you may need to run motor while
 		# checking color sensors for example
-		self.leftM.run_forever(speed_sp=speed)
-		self.rightM.run_forever(speed_sp=speed)
+		self.leftM.run_forever(speed_sp=-speed)
+		self.rightM.run_forever(speed_sp=-speed)
 		# Use stop() method to stop motors
 
 	def runTimed(self,speed,time): # Change how time is handled by passing values to method?
-		self.leftM.run_timed(time_sp=time,speed_sp=speed,stop_action='brake')
-		self.rightM.run_timed(time_sp=time,speed_sp=speed,stop_action='brake')
+		self.leftM.run_timed(time_sp=time,speed_sp=-speed,stop_action='brake')
+		self.rightM.run_timed(time_sp=time,speed_sp=-speed,stop_action='brake')
 
 		self.leftM.wait_while('running') # Stops program from running when motors are running
 
 
 	# Turning methods
 	def turnLeft(self,speed,position): # Turns left by activating right wheel
-		self.rightM.run_to_rel_pos(position_sp=position,speed_sp=speed,stop_action='hold')
-		self.leftM.run_to_rel_pos(position_sp=-position,speed_sp=speed,stop_action='hold')
+		self.rightM.run_to_rel_pos(position_sp=-position,speed_sp=speed,stop_action='hold')
+		self.leftM.run_to_rel_pos(position_sp=position,speed_sp=speed,stop_action='hold')
 		self.rightM.wait_while('running')
 
 	def turnRight(self,speed,position): # Turns right by activating left wheel
-		self.leftM.run_to_rel_pos(position_sp=position,speed_sp=speed,stop_action='hold')
-		self.rightM.run_to_rel_pos(position_sp=-position,speed_sp=speed,stop_action='hold')
+		self.leftM.run_to_rel_pos(position_sp=-position,speed_sp=speed,stop_action='hold')
+		self.rightM.run_to_rel_pos(position_sp=position,speed_sp=speed,stop_action='hold')
 		self.rightM.wait_while('running')
 
 

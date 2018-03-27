@@ -9,19 +9,19 @@ from lib import *
 def main():
 	i = 0 # Needed for incremental functions
 	speed = 150 # Needed to set speed for algorithm test and D&R test
-	position = 10
+	position = 50
 
 	# Declare your color ranges like this:
 	black = (
 		(0,0,0), # Lower RGB
-		(65,65,54) # Upper RGB
+		(180,100,100) # Upper RGB
 	)
 	green = (
 		(0,190,0), # Lower RGB
-		(168,1023,140) # Upper RGB
+		(140,1023,140) # Upper RGB
 	)
 	white = (
-		(220,310,170), # Lower RGB
+		(210,300,160), # Lower RGB
 		(1023,1023,1023) # Upper RGB (max value for color sensor is 1023)
 	)
 
@@ -44,60 +44,43 @@ def main():
 	try:
 		while True:
 			# Straight
-			if colorL.decodeColorRange(white) and colorR.decodeColorRange(white):
+			if colorL.decodeColorRange(white,"white") and colorR.decodeColorRange(white,"white"):
 				motor.runForever(speed=speed)
+				print("Straight")
 
 			# Right bend
-			elif colorR.decodeColorRange(black) and colorL.decodeColorRange(white):
-				motor.turnRight(speed=speed,position=50)
-				motor.runTimed(speed=speed,time=300)
+			elif colorR.decodeColorRange(black,"black") and colorL.decodeColorRange(white,"white"):
+				motor.turnRight(speed=speed,position=position)
+				motor.runTimed(speed=speed,time=100)
+				print("Right Bend")
 			# Left bend
-			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(white):
-				motor.turnLeft(speed=speed,position=50)
-				motor.runTimed(speed=speed,time=300)
+			elif colorL.decodeColorRange(black,"black") and colorR.decodeColorRange(white,"white"):
+				motor.turnLeft(speed=speed,position=position)
+				motor.runTimed(speed=speed,time=100)
+				print("Left Bend")
 			# Turning code
-			elif colorL.decodeColorRange(black) and colorR.decodeColorRange(black):
-				motor.runTimed(speed=-speed,time=250)
+			#elif colorL.decodeColorRange(black) and colorR.decodeColorRange(black):
+			#	motor.runTimed(speed=-speed,time=250)
 				
-				# Turn right
-				if colorR.decodeColorRange(green):
-					motor.turnRight(speed=speed,position=150)
-					motor.runTimed(speed=speed,time=1000)
-				# Else, turn left
-				elif colorL.decodeColorRange(green):
-					motor.turnLeft(speeed=speeed,position=150)
-					motor.runTimed(speed=speed,time=1000)
-				else:
-					motor.runForever(speed=speed)
+			# Turn right
+			elif colorR.decodeColorRange(green,"green"):
+				motor.runTimed(speed=speed,time=400)
+				motor.turnRight(speed=speed,position=152)
+				#motor.runTimed(speed=speed,time=1000)
+				print("Turn Right")
+			# Else, turn left
+			elif colorL.decodeColorRange(green,"green"):
+				motor.runTimed(speed=speed,time=400)
+				motor.turnLeft(speed=speed,position=152)
+				#motor.runTimed(speed=speed,time=1000)
+				print("Turn Left")
+			else:
+				motor.runForever(speed=speed)
 	except KeyboardInterrupt:
 		i = 0
 		print("Ending color sensor test")
 
-	print("start line algorithm test")
-	try:
-		while True:			
-			if colorL.decodeColorRange(black):
-				motor.stop()
-				motor.turnLeft(speed=speed,position=position)
-			elif colorR.decodeColorRange(black):
-				motor.stop()
-				motor.turnRight(speed=speed,position=position)
-			#elif colorL.decodeColorRange(green):
-			#	motor.stop()
-			#	print("turn left!")
-			#	motor.turnLeft(speed=speed,position=150)
-			#	motor.runTimed(speed=speed,time=1000)
-			#elif colorR.decodeColorRange(green):
-			#	motor.stop()
-			#	print("turn right!")
-			#	motor.turnRight(speed=speed,position=150)
-			#	motor.runTimed(speed=speed,time=1000)
-			else:
-				motor.runForever(speed=speed)
-	except KeyboardInterrupt:
-		motor.stop()
-		print("end line algorithm test")
-
+	motor.stop()
 
 	return 0
 
